@@ -15,15 +15,29 @@ app.listen(port, () => {
   console.log(`Listening to requests on port ${port}`);
 });
 
-//Metodo get para obtener tener todos los datos de explorers 
+//Metodo get para obtener tener todos los datos de explorers
 app.get("/explorers", async (req, res) => {
   const allExplorers = await prisma.explorer.findMany({});
   res.json(allExplorers);
 });
 
-//endpoint GET que te regrese el explorer al enviar un ID por query params
-app.get('/explorers/:id', async (req, res) => {
-    const id = req.params.id;
-    const explorer = await prisma.explorer.findUnique({where: {id: parseInt(id)}});
-    res.json(explorer);
+//endpoint GET que te regresa el explorer al enviar un ID por query params
+app.get("/explorers/:id", async (req, res) => {
+  const id = req.params.id;
+  const explorer = await prisma.explorer.findUnique({
+    where: { id: parseInt(id) },
   });
+  res.json(explorer);
+});
+
+//POST crear nuevos explorers
+app.post("/explorers", async (req, res) => {
+  const explorer = {
+    name: req.body.name,
+    username: req.body.username,
+    mission: req.body.mission,
+  };
+  const message = "Explorer creado.";
+  await prisma.explorer.create({ data: explorer });
+  return res.json({ message });
+});
