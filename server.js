@@ -15,6 +15,8 @@ app.listen(port, () => {
   console.log(`Listening to requests on port ${port}`);
 });
 
+//API
+//Endpoint de tabla Explorers
 //Metodo get para obtener tener todos los datos de explorers
 app.get("/explorers", async (req, res) => {
   const allExplorers = await prisma.explorer.findMany({});
@@ -64,3 +66,11 @@ app.delete('/explorers/:id', async (req, res) => {
 	await prisma.explorer.delete({where: {id: id}});
 	return res.json({message: "Eliminado correctamente"});
 });
+
+
+//Endpoint de tabla ExplorerInfo
+//Get obtener toda la información
+app.get("/explorerinfo", async(req, res) => {
+  const allExplorersInfo = await prisma.ExplorerInfo.findMany({});
+  res.json(allExplorersInfo);
+})
