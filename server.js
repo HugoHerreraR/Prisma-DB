@@ -82,3 +82,15 @@ app.get("/explorerinfo/:id", async(req, res) => {
   });
   res.json(allExplorersInfo);
 })
+//Post crear nuevo explorer
+app.post("/explorerinfo", async(req, res) => {
+  const explorer = {
+    name: req.body.name,
+    lang: req.body.lang,
+    missionCommander: req.body.missionCommander,
+    enrollments: req.body.enrollments
+  }
+  const message = "Explorer registrado";
+  await prisma.ExplorerInfo.create({data: explorer});
+  return res.json({message});
+})
