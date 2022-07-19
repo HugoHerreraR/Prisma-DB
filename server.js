@@ -109,3 +109,9 @@ app.put("/explorerinfo/:id", async(req, res) => {
 
   return res.json({message: "Actulizado correctamente"});
 });
+//DELETE explorer
+app.delete("/explorerinfo/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  await prisma.ExplorerInfo.delete({ where: {id: id}});
+  return res.json({message: "Eliminado"})
+})
