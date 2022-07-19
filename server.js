@@ -74,3 +74,11 @@ app.get("/explorerinfo", async(req, res) => {
   const allExplorersInfo = await prisma.ExplorerInfo.findMany({});
   res.json(allExplorersInfo);
 })
+//Get obtener información por id
+app.get("/explorerinfo/:id", async(req, res) => {
+  const id = req.params.id;
+  const allExplorersInfo = await prisma.ExplorerInfo.findUnique({
+    where: {id: parseInt(id)}
+  });
+  res.json(allExplorersInfo);
+})
