@@ -94,3 +94,18 @@ app.post("/explorerinfo", async(req, res) => {
   await prisma.ExplorerInfo.create({data: explorer});
   return res.json({message});
 })
+//PUT modificar explorer
+app.put("/explorerinfo/:id", async(req, res) => {
+  const id = parseInt(req.params.id);
+
+  await prisma.ExplorerInfo.update({
+    where: {
+      id: id,
+    },
+    data: {
+      hasCertification: req.body.hasCertification
+    }
+  });
+
+  return res.json({message: "Actulizado correctamente"});
+});
