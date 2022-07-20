@@ -123,7 +123,29 @@ app.delete("/explorerinfo/:id", async (req, res) => {
   return res.json({message: "Eliminado"})
 })
 
+//API missionCommander
 app.get("/missionCommander", async (req, res) => {
   const allCommanders = await prisma.missionCommander.findMany({});
   res.json(allCommanders);
+})
+
+app.get("/missionCommander/:id", async(req, res) => {
+  const id = req.params.id;
+  const Comander = await prisma.missionCommander.findUnique({
+    where: {id: parseInt(id)}
+  })
+  res.json(Comander);
+})
+
+app.post("/missionCommander", async(req, res) => {
+  const commander = {
+    name: req.body.name,
+    username: req.body.username,
+    mainStack: req.body.mainStack,
+    currentEnrollment: req.body.currentEnrollment,
+    hasAzureCertification: req.body.hasAzureCertification
+  }
+  const message = "missionCommander registrado";
+  await prisma.missionCommander.create({data: commander});
+  return res.json({message});
 })
