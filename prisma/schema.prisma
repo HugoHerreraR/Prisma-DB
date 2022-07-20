@@ -31,8 +31,8 @@ model ExplorerInfo {
 
 model missionCommander {
   id Int @id @default(autoincrement())
-  name String @db.VarChar(255)
-  username String @unique
+  name String @unique @db.VarChar(255)
+  username String @db.VarChar(255)
   mainStack String @db.VarChar(255)
   currentEnrollment Boolean
   hasAzureCertification Boolean

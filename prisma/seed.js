@@ -72,30 +72,53 @@ const prisma = new PrismaClient();
 //   }
 // })();
 
+// (async function main() {
+//   try {
+//     const explorer = await prisma.ExplorerInfo.upsert({
+//       where: {name: "explorer"},
+//       update: {},
+//       create: {
+//         name: "Sara",
+//         lang: "Desconocido",
+//         missionCommander: "Carlos",
+//         enrollments: 3
+//       }
+//     });
+//     const explorer2 = await prisma.ExplorerInfo.upsert({
+//       where: {name: "explorer2"},
+//       update: {},
+//       create: {
+//         name: "Laura",
+//         lang: "Desconocido",
+//         missionCommander: "Juan",
+//         enrollments: 1
+//       }
+//     });
+
+//     console.log("Create 2 explorersinfo");
+//   } catch (e) {
+//     console.error(e);
+//     process.exit(1);
+//   } finally {
+//     await prisma.$disconnect();
+//   }
+// })();
+
 (async function main() {
   try {
-    const explorer = await prisma.ExplorerInfo.upsert({
-      where: {name: "explorer"},
+    const registro = await prisma.missionCommander.upsert({
+      where: { name: "registro" },
       update: {},
       create: {
-        name: "Sara",
-        lang: "Desconocido",
-        missionCommander: "Carlos",
-        enrollments: 3
-      }
-    });
-    const explorer2 = await prisma.ExplorerInfo.upsert({
-      where: {name: "explorer2"},
-      update: {},
-      create: {
-        name: "Laura",
-        lang: "Desconocido",
-        missionCommander: "Juan",
-        enrollments: 1
-      }
+        name: "Jose",
+        username: "jos",
+        mainStack: "Desconocido",
+        currentEnrollment: false,
+        hasAzureCertification: true,
+      },
     });
 
-    console.log("Create 2 explorersinfo");
+    console.log("Create missionCommander");
   } catch (e) {
     console.error(e);
     process.exit(1);
