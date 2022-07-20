@@ -122,3 +122,8 @@ app.delete("/explorerinfo/:id", async (req, res) => {
   await prisma.ExplorerInfo.delete({ where: {id: id}});
   return res.json({message: "Eliminado"})
 })
+
+app.get("/missionCommander", async (req, res) => {
+  const allCommanders = await prisma.missionCommander.findMany({});
+  res.json(allCommanders);
+})
