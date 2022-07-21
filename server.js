@@ -149,3 +149,15 @@ app.post("/missionCommander", async(req, res) => {
   await prisma.missionCommander.create({data: commander});
   return res.json({message});
 })
+
+app.put("/missionCommander/:id", async(req, res) => {
+  const id = parseInt(req.params.id);
+  await prisma.missionCommander.update({
+    where: {id: id},
+    data:{
+      currentEnrollment: req.body.currentEnrollment,
+      hasAzureCertification: req.body.currentEnrollment
+    }
+  })
+  return res.json({message: "Actualizado"})
+})
